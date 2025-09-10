@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Warrior : Enemy
+public class Enemy_Warrior : Enemy, ICounterable
 {
     private Entity_Combat combat;
 
@@ -14,6 +14,7 @@ public class Enemy_Warrior : Enemy
         attackState = new Enemy_AttackState(this, stateMachine, "attack");
         battleState = new Enemy_BattleState(this, stateMachine, "move");
         deadState = new Enemy_DeadState(this, stateMachine, "idle");
+        stunnedState = new Enemy_StunnedState(this, stateMachine, "stunned");
         
     }
 
@@ -27,5 +28,20 @@ public class Enemy_Warrior : Enemy
         base.Start();
 
         stateMachine.Initialize(idleState);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.F))
+            HandleCounter();
+    }
+    public void HandleCounter()
+    {
+        if (canBestunned == false)
+            return;
+
+        stateMachine.ChangeState(stunnedState);
     }
 }
