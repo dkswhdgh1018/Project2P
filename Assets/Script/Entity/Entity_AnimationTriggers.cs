@@ -17,6 +17,6 @@ public class Entity_AnimationTriggers : MonoBehaviour
 
     private void AttackTrigger()
     {
-        entityCombat.performAttack();
+        entityCombat.PerformAttack();
     }
 }

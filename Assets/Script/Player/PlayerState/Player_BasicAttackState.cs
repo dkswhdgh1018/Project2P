@@ -14,7 +14,6 @@ public class Player_BasicAttackState : PlayerState
     {
         if (comboLimit != player.attackVelocity.Length)
         {
-            Debug.LogWarning("I've adjusted combo limit, according to attack velocity array!");
             comboLimit = player.attackVelocity.Length;
         }
     }
@@ -36,6 +35,9 @@ public class Player_BasicAttackState : PlayerState
 
         if(triggerCalled)
             stateMachine.ChangeState(player.idleState);
+
+        if (input.Player.CounterAttack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.counterAttackState);
     }
 
     public override void Exit()

@@ -4,6 +4,7 @@ public class Enemy_Warrior : Enemy, ICounterable
 {
     private Entity_Combat combat;
 
+    public bool CanBeCountered { get => canBestunned; }
     protected override void Awake()
     {
         base.Awake();
@@ -20,7 +21,7 @@ public class Enemy_Warrior : Enemy, ICounterable
 
     public void Attack()
     {
-        combat.performAttack();
+        combat.PerformAttack();
     }
 
     protected override void Start()
@@ -30,16 +31,9 @@ public class Enemy_Warrior : Enemy, ICounterable
         stateMachine.Initialize(idleState);
     }
 
-    protected override void Update()
-    {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.F))
-            HandleCounter();
-    }
     public void HandleCounter()
     {
-        if (canBestunned == false)
+        if (CanBeCountered == false)
             return;
 
         stateMachine.ChangeState(stunnedState);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Entity_Health : MonoBehaviour
+public class Entity_Health : MonoBehaviour, IDamagable
 {
     private Entity_VFX entityVfx;
     private Entity entity;
@@ -50,7 +50,12 @@ public class Entity_Health : MonoBehaviour
         float duration = CalculateDuration(damage);
 
         entity?.ReciveKnockback(knockback, duration);
-        entityVfx?.PlayOnDamageVfx();
+
+        if (entityVfx != null)
+        {
+            entityVfx?.PlayOnDamageVfx();
+        }
+
         ReduceHp(damage);
     }
 

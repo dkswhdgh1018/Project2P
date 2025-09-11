@@ -16,7 +16,6 @@ public class Skill_Base : MonoBehaviour
     {
         if (OnCooldown())
         {
-            Debug.Log("On Cooldown");
             return false;
         }
 

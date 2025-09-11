@@ -18,6 +18,8 @@ public class Player : Entity
     public Player_DashState dashState { get; private set; }
     public Player_BasicAttackState basicAttackState { get; private set; }
     public Player_BaldoState baldoState { get; private set; }
+
+    public Player_CounterAttackState counterAttackState { get; private set; }
     #endregion
 
     [Header("AttackDetails")]
@@ -64,6 +66,7 @@ public class Player : Entity
         dashState = new Player_DashState(this, stateMachine, "dash");
         basicAttackState = new Player_BasicAttackState(this, stateMachine, "basicAttack");
         baldoState = new Player_BaldoState(this, stateMachine, "baldo");
+        counterAttackState = new Player_CounterAttackState(this, stateMachine, "counterAttack");
     }
 
     protected override void Start()

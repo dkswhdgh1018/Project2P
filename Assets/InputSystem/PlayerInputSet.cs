@@ -136,6 +136,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CounterAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c08b8389-c5e7-4701-bbcf-675819d89971"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -237,6 +246,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""Baldo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f03c7eae-1c78-436b-9b1d-1115b97b2978"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CounterAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -267,6 +287,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Baldo = m_Player.FindAction("Baldo", throwIfNotFound: true);
+        m_Player_CounterAttack = m_Player.FindAction("CounterAttack", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -352,6 +373,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Baldo;
+    private readonly InputAction m_Player_CounterAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -383,6 +405,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Baldo".
         /// </summary>
         public InputAction @Baldo => m_Wrapper.m_Player_Baldo;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/CounterAttack".
+        /// </summary>
+        public InputAction @CounterAttack => m_Wrapper.m_Player_CounterAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -424,6 +450,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Baldo.started += instance.OnBaldo;
             @Baldo.performed += instance.OnBaldo;
             @Baldo.canceled += instance.OnBaldo;
+            @CounterAttack.started += instance.OnCounterAttack;
+            @CounterAttack.performed += instance.OnCounterAttack;
+            @CounterAttack.canceled += instance.OnCounterAttack;
         }
 
         /// <summary>
@@ -450,6 +479,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Baldo.started -= instance.OnBaldo;
             @Baldo.performed -= instance.OnBaldo;
             @Baldo.canceled -= instance.OnBaldo;
+            @CounterAttack.started -= instance.OnCounterAttack;
+            @CounterAttack.performed -= instance.OnCounterAttack;
+            @CounterAttack.canceled -= instance.OnCounterAttack;
         }
 
         /// <summary>
@@ -538,5 +570,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBaldo(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CounterAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCounterAttack(InputAction.CallbackContext context);
     }
 }
